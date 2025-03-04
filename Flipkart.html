@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        button{
+            cursor: pointer;
+    
+        }
+        button:hover{
+            transform: scale(0.8);
+        }
+        body{
+            background-color: rgb(241, 238, 238);
+        }
+        header{
+            box-shadow: 0px 0px 10px grey;
+            background-color: rgb(54, 176, 252);
+            padding: 13px 0;
+        }
+        header>div{
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        header div{
+            display: flex;
+            align-items: center;
+            gap:24px;
+        }
+        header .inputbar{
+            border-radius: 10px;
+            padding: 13px 0;
+            width: 30%;
+            padding-left: 20px;
+            background: white;
+            /* background-color: rgb(235, 248, 248); */
+        }
+        header input{
+            border:none;
+            background: white;
+            /* background-color: rgb(230, 248, 248); */
+        }
+        header input::placeholder{
+            font-size: 18px;
+        }
+        header input:hover{
+            border: none;
+        }
+        /* intro */
+        .intro{
+            border-radius: 4px;
+            background-color: white;
+            font-size: 18px;
+            font-weight: 500;
+            color: grey;
+            margin: 10px 20px;
+            padding: 40px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .intro div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #result{
+            background-color: white;
+            margin:10px 20px;
+            padding:40px;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            /* gap:30px; */
+        }
+        #result1{
+            background-color: white;
+            width:700px;
+            margin: 10px 20px;
+        }
+        .card:hover{
+            transition: 0.7s;
+            box-shadow: 0px 0px 13px rgb(215, 214, 214);
+            padding: 20px;
+        }
+
+        .card,.card-products{
+            padding: 20px;
+        }
+        .card img{
+            width: 100%;
+        }
+        .card h4{
+            font-weight: 700;
+            font-size: 18px;
+           
+        }
+        .card i{
+            font-size: 10px;
+            margin-right: 6px;
+            padding: 0px;
+        }
+        .card p{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: green;
+            color: white;
+            padding: 2px;
+            width: fit-content;
+            padding: 0 2px;
+            font-size: 14px;
+
+            border-radius: 4px;
+        }
+        .filtersApply{
+            width: 320px;
+            padding: 20px;
+        }
+        .filtersApply p{
+            color: grey;
+        }
+        .filters{
+            display: flex;
+            justify-content: space-between;
+        }
+        .brands{
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap:10px;
+        }
+        .brands>div:first-child,.ratings>div:first-child,.prices>div:first-child{
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .checkbox>div{
+            margin-top: 14px;
+            font-size: 19px;
+            display: flex;
+            align-items: center;
+            gap:17px;
+            /* justify-content: space-between; */
+        }
+        .grocery{
+            display: flex;
+            gap:40px;
+            align-items: center;
+        }
+        .rating i{
+            font-size: 12px;
+            margin-right: 2px;
+
+        }
+        .rating{
+            margin-bottom: 10px;
+            font-size: 12px;
+            background-color: green;
+            color: white;
+            width: fit-content;
+            padding: 2px 6px;
+        }
+        .darkBtn,.lightBtn{
+            margin-top: 15px;
+            border: none;
+            outline: none;
+            background-color: green;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 8px 40px;
+            letter-spacing: 1.3px;
+            font-size: 18px;
+
+        }
+        .darkBtn{
+            padding: 10px 40px;
+
+        }
+        .lightBtn{
+            background-color: white;
+            color: green;
+            border: 2px solid green;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+           <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/fkheaderlogo_exploreplus-44005d.svg" alt="">
+           <div class="inputbar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="Search for products, Brands,More">
+           </div>
+           <div>
+            <i class="fa-solid fa-user" "></i>
+            <p>Login</p>
+            <i class="fa-solid fa-angle-down" style="font-size: 16px";></i>
+           </div>
+           <div>
+            <i class="fa-solid fa-cart-shopping"></i>
+            <p>Cart</p>
+           </div>
+           <div>
+            <i class="fa-brands fa-sellcast"></i>
+            <p>Become a seller</p>
+           </div>
+           <div>
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+           </div>
+        </div>
+    </header>
+
+    <section id="section">
+        <div class="intro">
+            <div onclick="Grocery()">
+                <img src="https://rukminim1.flixcart.com/flap/80/80/image/29327f40e9c4d26b.png?q=100" alt="grocery">
+                <p>Grocery</p>
+            </div>
+            <div onclick="Mobiles()">
+                <img src="https://rukminim1.flixcart.com/flap/80/80/image/22fddf3c7da4c4f4.png?q=100" alt="mobiles">
+                <p>Mobiles</p>
+            </div>
+            <div onclick="Travel()">
+                <img src="https://rukminim1.flixcart.com/fk-p-flap/80/80/image/0139228b2f7eb413.jpg?q=100" alt="travel">
+                <p>Travel</p>
+            </div>
+            
+             <div onclick="Toys()">
+                <img src="https://img.freepik.com/premium-photo/plastic-toys-isolated-white-background-plastic-toys-children-generative-ai_634053-8054.jpg?w=996" width="120px" alt="toys">
+                <p>Toys</p>
+            </div>
+
+            <div onclick="Twowheelers()">
+                <img src="https://img.freepik.com/free-photo/cool-motorcycle-studio_23-2150781712.jpg?t=st=1715368820~exp=1715372420~hmac=a9bdeffdaf83eeda7497f074172b41b340ecc0daae74e458579869d7e315241e&w=1060" width="120px" alt="Two wheelers">
+                <p>Two wheelers</p>
+            </div>
+        </div>
+    </section>
+   <div style="display: flex;margin-left: 90px;">
+    <div id="result1"></div>
+    <div id="result"></div>
+   </div>
+    <script>
+        let section=document.getElementById('section')
+            let result=document.getElementById('result')
+        let result1=document.getElementById('result1')
+       
+var filteredData;
+        let products=[
+            {
+                id:'grocery',
+                proName:'Fortune Sunlite Refined Sunflower Oil Pouch (Suryakanti Enne)  (500 ml)',
+               img:'https://img.freepik.com/premium-vector/throat-drops-package-design-isolated-white-background_317442-127.jpg?w=740',
+               company:'Oil',
+               rating:5,
+               weight:'250g',
+               price:250,
+            },
+            {
+                id:'grocery',
+                proName:'Tata Vacuum Evaporated Iodized Salt (Iodine Yukta Uppu)  (1 kg)',
+               img:'https://img.freepik.com/premium-vector/rice-package-mockup-thailand-food-products-vector-illustration_249011-1304.jpg?w=740',
+               company:'salt',
+               rating:4.9,
+               weight:'400g',
+               price:180,
+            },
+            {
+                id:'grocery',
+                proName:'Tata Sampann Red Masoor Dal (Channangi Bele) (Split)  (500 g)',
+               img:'https://img.freepik.com/premium-photo/yellow-split-dal_55610-2279.jpg?w=740',
+               company:'pulses',
+               rating:3.5,
+               weight:'800g',
+               price:60,
+            },
+            {
+                id:'grocery',
+                proName:'Classic Yellow Moong Dal (Hesaru Bele) (Split) by Flipkart Grocery  (500 g)',
+               img:'https://img.freepik.com/premium-photo/assorted-legumes-beans-sacks-standing-circle-isolated-dark-background-with-copy-space-middle-healthy-eating-concept_95891-11237.jpg?w=740',
+               company:'pulses',
+               rating:4.5,
+               weight:'400g',
+               price:39,
+            },
+
+            {
+                id:'grocery',
+                proName:'Classic Kabuli Chana (Kabuli Kadale) (Whole) by Flipkart Grocery  (1 kg)',
+                img:"https://img.freepik.com/premium-psd/picture-circle-yellow-legume-seeds_787500-18759.jpg?w=740",
+                company:"pulses",
+               rating:2.6,
+               weight:'2kg',
+               price:256,
+            },
+            {
+                id:'grocery',
+                proName:'Pillsbury Chakki Fresh Atta (Godhi Hittu) (10 kg)',
+               img:'https://img.freepik.com/premium-photo/two-full-grain-sacks-made-rough-burlap-with-ties-ears-wheat-warehouse_1138814-18.jpg?w=740',
+               company:'wheatFlour',
+               rating:2.6,
+               weight:'2kg',
+               price:256,
+            },
+            {
+                id:'grocery',
+                proName:'Pillsbury Chakki Fresh Atta (Godhi Hittu) (10 kg)',
+               img:'https://img.freepik.com/premium-photo/harmony-legumes-spices_705284-18622.jpg?w=740',
+               company:'wheatFlour',
+               rating:4.6,
+               weight:'4kg',
+               price:56,
+            },
+            {
+                id:'grocery',
+                proName:'Pillsbury Chakki Fresh Atta (Godhi Hittu) (10 kg)',
+                img:'https://img.freepik.com/free-vector/realistic-agricultural-crops-set_1284-22985.jpg?t=st=1715425006~exp=1715428606~hmac=5520127bb9bf46d9d92b49cf8da3efc49a1283fe96931a66725e8cd3ef82bc79&w=740',
+               company:'wheatFlour',
+               rating:1.6,
+               weight:'3kg',
+               price:156,
+            },
+            {
+                id:'grocery',
+                proName:'Tata Sampann Yellow Toor/Arhar Dal (Togari Bele) (Split)  (1 kg)',
+               img:'https://img.freepik.com/premium-psd/different-types-beans-bowl-white-background-top-view_657074-373.jpg?w=740',
+               company:'pulses',
+               rating:3.2,
+               weight:'1kg',
+               price:676,
+            },
+            {
+                id:'grocery',
+                proName:'SNICKERS Shareable Bites Miniatures Chocolate Bites  (4 x 120 g)',
+               img:'https://img.freepik.com/free-vector/delicious-snack-collection-with-realistic-design_23-2147909595.jpg?t=st=1715417854~exp=1715421454~hmac=034fb491f6b596e684d274ef853693f966294f26ed83224d2d663ab0484909e8&w=740',
+               company:'Chocolate',
+               rating:3.6,
+               weight:'1kg',
+               price:556,
+            },
+            {
+                id:'grocery',
+                proName:'Trinetra Green Moong Dal (Whole)  (1000 g) Trinetra Green Moong Dal (Whole)',
+               img:'https://img.freepik.com/free-photo/set-redf-yellow-green-lentils-different-lentils-brown-bowls-beige-wooden-table-top-view_176474-2170.jpg?t=st=1715525273~exp=1715528873~hmac=638e12f4bcaafb701e45004f7c764a6249b93bc029c6bcc536868f47f51d5b29&w=740',
+               company:'pulses',
+               rating:1.9,
+               weight:'2kg',
+               price:77,
+            },
+            {
+                id:'grocery',
+                proName:'Cadbury Dairy Milk Silk Fruits and Nut Chocolate Bars  (8 x 55 g) ',
+                img:'https://img.freepik.com/premium-vector/choco-pie-foil-package-3d-illustration-isolated-brown-background_317810-3358.jpg?w=740',
+                company:'Chocolate',
+               rating:2.2,
+               weight:'200g',
+               price:500,
+            },
+            {
+                id:'grocery',
+                proName:'Cadbury Dairy Milk Silk Fruits and Nut Chocolate Bars  (8 x 55 g)',
+                img:'https://img.freepik.com/premium-psd/melted-chocolate-border-manual-cut-out-transparent_154797-1785.jpg?w=996',
+                company:'Chocolate',
+               rating:2.1,
+               weight:'20g',
+               price:40,
+            },
+            {
+                id:'mobiles',
+                proName:'vivo T3x 5G (Crimson Bliss, 128 GB)  (8 GB RAM)',
+                img:'https://img.freepik.com/free-vector/realistic-phones-different-views_52683-28436.jpg?t=st=1715452988~exp=1715456588~hmac=33f2b0dc30bc51159c4884e85be25a35194aeab11b29df11f1cd181ef5feebc2&w=996',
+                company:'vivo',
+               rating:2.1,
+               weight:'20g',
+               price:10000,
+            },
+            {
+                id:'mobiles',
+                proName:'vivo T2x 5G (Glimmer Black, 128 GB)  (6 GB RAM)#JustHere',
+                img:'https://img.freepik.com/free-vector/realistic-smartphone-different-views_52683-27225.jpg?t=st=1715453027~exp=1715456627~hmac=07d0e5118dbec35e8fed440632436a909237fdcdf5ef1efd2987b0e726059b95&w=996',
+                company:'vivo',
+               rating:2.1,
+               weight:'70g',
+               price:40000,
+            },
+            {
+                id:'mobiles',
+                proName:'vivo pro',
+                img:'https://img.freepik.com/premium-photo/two-smart-phones-are-connected-red-background-with-blue-watch-left_843415-1952.jpg?w=996',
+                company:'vivo',
+               rating:2.1,
+               weight:'300g',
+               price:50000,
+            },
+            {
+                id:'mobiles',
+                proName:'vivo T2x 5G (Aurora Gold, 128 GB)  (8 GB RAM)#JustHere',
+                img:'https://img.freepik.com/premium-photo/modern-black-smart-phone-lies-smooth-dark-blue-surface_1197797-4620.jpg?w=996',
+                company:'vivo',
+               rating:2.1,
+               weight:'40g',
+               price:35000,
+            },
+            {
+                id:'mobiles',
+                proName:'vivo T3 5G (Cosmic Blue, 256 GB)  (8 GB RAM)',
+                img:'https://img.freepik.com/free-vector/face-back-cover-smartphone-various-views_23-2148337943.jpg?t=st=1715449684~exp=1715453284~hmac=6c5ecdc00abde3f00583f3a652981954b5dfa743a95ff2474b080339f39fd5dc&w=996',
+                company:'vivo',
+               rating:2.1,
+               weight:'90g',
+               price:75000,
+            },
+            {
+                id:'mobiles',
+                proName:'OPPO A59 5G (Silk Gold, 128 GB)  (4 GB RAM)#JustHere',
+                img:'https://img.freepik.com/premium-photo/high-tech-presentation-3d-smartphones-different-angles-futuristic-podiums_776674-766165.jpg?w=996',
+                company:'oppo',
+               rating:4.3,
+               weight:'60g',
+               price:7000,
+            },
+            {
+                id:'mobiles',
+                proName:'OPPO A17 (Lake Blue, 64 GB)  (4 GB RAM)#JustHere',
+                img:'https://img.freepik.com/premium-photo/galaxy-wallpaper-background-galaxy_198067-175732.jpg?w=996',
+                company:'oppo',
+               rating:3.1,
+               weight:'50g',
+               price:95000,
+            },
+            {
+                id:'mobiles',
+                proName:'OPPO Reno11 5G (Wave Green, 256 GB)  (8 GB RAM)#JustHere (Wave Green, 256 GB)  (8 GB RAM)#JustHere',
+                img:'https://img.freepik.com/premium-photo/back-phone-with-logo-logo-phone_993259-8865.jpg?w=1060',
+                company:'oppo',
+               rating:3.4,
+               weight:'150g',
+               price:95000,
+            },
+            {
+                id:'mobiles',
+                proName:'OPPO A18 (Glowing Black, 64 GB)  (4 GB RAM)#JustHere',
+                img:'https://img.freepik.com/premium-photo/abstract-bokeh-background_999327-35841.jpg?w=996',
+                company:'oppo',
+               rating:2.9,
+               weight:'90g',
+               price:27000,
+            },
+            {
+                id:'mobiles',
+                proName:'OPPO A18 (Glowing Black, 64 GB)  (4 GB RAM)#JustHere',
+                img:'https://img.freepik.com/free-photo/still-life-books-versus-technology_23-2150063043.jpg?t=st=1715453215~exp=1715456815~hmac=aa9ae84e23b25cf46d81f4a2ccb822d55a39dc87fe134a32b0165b77315a4467&w=996',
+                company:'oppo',
+               rating:4.1,
+               weight:'90g',
+               price:27000,
+            },
+            {
+                id:'mobiles',
+                proName:'OPPO F25 Pro 5G (Lava Red, 128 GB)  (8 GB RAM)',
+                img:'https://img.freepik.com/free-vector/flat-smartphone-different-perspectives_23-2148764900.jpg?t=st=1715449789~exp=1715453389~hmac=302d0317fa455aa8cb40485f006f188d179bb48ab2aaf60cb683261aef253458&w=996',
+                company:'oppo',
+               rating:2.8,
+               weight:'20g',
+               price:67000,
+            },
+            {
+                id:'mobiles',
+                proName:'OPPO F25 Pro 5G (Lava Red, 128 GB)  (8 GB RAM)',
+                img:'https://img.freepik.com/free-photo/new-cell-phone-colorful-background_58702-4924.jpg?t=st=1715449955~exp=1715453555~hmac=cab55c87587c37e45285a7f381a6c887662e9b92475a31117bc56f9cefc7366d&w=996',
+                company:'oppo',
+               rating:2.3,
+               weight:'180g',
+               price:75000,
+            },
+            {
+                id:'mobiles',
+                proName:'SAMSUNG Galaxy F14 5G (GOAT Green, 128 GB)  (6 GB RAM)#JustHere',
+                img:'https://img.freepik.com/free-photo/tablet-with-smartphone-bright-table_23-2148037015.jpg?t=st=1715450149~exp=1715453749~hmac=24d0e55a1b3d9155831c506a9b0ed166d156b917cd8d2391e6507ba0192d1677&w=996',
+                company:'galaxy',
+               rating:4.7,
+               weight:'60g',
+               price:8000,
+            },
+            {
+                id:'mobiles',
+                proName:'SAMSUNG Galaxy F15 5G (Ash Black, 128 GB)  (6 GB RAM)',
+                img:'https://img.freepik.com/premium-photo/smartphone-with-purple-purple-display-screen_662214-51344.jpg?w=996',
+                company:'galaxy',
+               rating:4.4,
+               weight:'80g',
+               price:67000,
+            },
+            {
+                id:'mobiles',
+                proName:'SAMSUNG Galaxy S23 5G (Phantom Black, 128 GB)  (8 GB RAM)#JustHere',
+                img:'https://img.freepik.com/premium-photo/two-smart-phones-are-connected-red-background-with-blue-watch-left_843415-1952.jpg?w=996',
+                company:'galaxy',
+               rating:2.1,
+               weight:'56g',
+               price:85000,
+            },
+            {
+                id:'travel',
+                proName:'Zouk Womens Printed Office Bag for multipurpose use Shoulder Bag  (Red, 5 L)',
+                img:'https://img.freepik.com/free-photo/sand-sunbath-ocean-trip-parasol_1232-4558.jpg?t=st=1715532164~exp=1715535764~hmac=b43d2f6d2e73921277311a15094065a2031125b98788fed389281ea44b91d7fe&w=996',
+                company:'beach',
+               rating:4.1,
+               weight:'travel',
+               price:56000,
+            },
+            {
+                id:'travel',
+                proName:'Zouk Womens Printed Office Bag for multipurpose use Shoulder Bag  (Red, 5 L)',
+                img:'https://img.freepik.com/free-photo/resort-solitude-tropic-ocean-maldives_1232-4566.jpg?t=st=1715532227~exp=1715535827~hmac=d7aa4573f2cd42a7a79f3bd7b080f215e49e45dc40005b05968edfa2e038220f&w=996',
+                company:'beach',
+               rating:2.1,
+               weight:'travel',
+               price:5000,
+            },
+            {
+                id:'travel',
+                proName:'gustave Camping Hiking Hunting Travel Beach Bucket Hat for Men Women Boys and  (Khaki, Pack of 1)',
+                img:'https://img.freepik.com/premium-photo/beach-chair-sits-beach-with-blue-sky-small-island-background_131346-12657.jpg?w=996',
+                company:'beach',
+               rating:4.4,
+               weight:'travel',
+               price:28000,
+            },
+            {
+                id:'travel',
+                proName:'gustave Camping Hiking Hunting Travel Beach Bucket Hat for Men Women Boys and  (Khaki, Pack of 1)',
+                img:'https://img.freepik.com/premium-photo/beach-chairs-tropical-island_1339-83014.jpg?w=996',
+                company:'beach',
+               rating:4.4,
+               weight:'travel',
+               price:12600,
+            },
+            {
+                id:'travel',
+                proName:'gustave Camping Hiking Hunting Travel Beach Bucket Hat for Men Women Boys and  (Khaki, Pack of 1)',
+                img:'https://img.freepik.com/premium-photo/women-asians-travel-relax-holiday-photograph-landscape-moutain-thailand_36074-682.jpg?w=996',
+                company:'hills',
+               rating:2.3,
+               weight:'travel',
+               price:29000,
+            },
+            {
+                id:'travel',
+                proName:'gustave Camping Hiking Hunting Travel Beach Bucket Hat for Men Women Boys and  (Khaki, Pack of 1)',
+                img:'https://img.freepik.com/premium-photo/beach-chairs-tropical-island_1339-83014.jpg?w=996',
+                company:'hills',
+               rating:4.2,
+               weight:'travel',
+               price:15903,
+            },
+            {
+                id:'travel',
+                proName:'gustave Camping Hiking Hunting Travel Beach Bucket Hat for Men Women Boys and  (Khaki, Pack of 1)',
+                img:'https://img.freepik.com/free-photo/woman-spread-arms-middle-high-trees-nature-forest_1150-38016.jpg?t=st=1715532460~exp=1715536060~hmac=8817889efbc130b177c995c9a2e2967a50c901cea58f652fb24f3d1689e761c9&w=996',
+                company:'hills',
+               rating:3.9,
+               weight:'travel',
+               price:15490,
+            },
+             {
+                id:'travel',
+                proName:'gustave Camping Hiking Hunting Travel Beach Bucket Hat for Men Women Boys and  (Khaki, Pack of 1)',
+                img:'https://img.freepik.com/free-photo/mountainside-with-green-trees_1204-287.jpg?t=st=1715532363~exp=1715535963~hmac=03b80bde2d4c4bbe20e276f617358f267e1992348a0282a6b761de4676411b54&w=996',
+                company:'hills',
+               rating:2.4,
+               weight:'travel',
+               price:15300,
+            },
+            {
+                id:'travel',
+                proName:'gustave Camping Hiking Hunting Travel Beach Bucket Hat for Men Women Boys and  (Khaki, Pack of 1)',
+                img:'https://img.freepik.com/free-photo/seljalandsfoss-waterfall-iceland-guy-red-jacket-looks-seljalandsfoss-waterfall_335224-599.jpg?t=st=1715532765~exp=1715536365~hmac=43d5558fa2ad7bc66b198fd65f74c4140961e703b634db668c91d85c9155416d&w=996',
+                company:'waterfalls',
+               rating:1.4,
+               weight:'travel',
+               price:19000,
+            },
+            {
+                id:'travel',
+                proName:'gustave Camping Hiking Hunting Travel Beach Bucket Hat for Men Women Boys and  (Khaki, Pack of 1)',
+                img:'https://img.freepik.com/free-photo/mountainside-with-green-trees_1204-287.jpg?t=st=1715532363~exp=1715535963~hmac=03b80bde2d4c4bbe20e276f617358f267e1992348a0282a6b761de4676411b54&w=996',
+                company:'waterfalls',
+               rating:1.2,
+               weight:'travel',
+               price:10500,
+            },
+            {
+                id:'travel',
+                proName:'gustave Camping Hiking Hunting Travel Beach Bucket Hat for Men Women Boys and  (Khaki, Pack of 1)',
+                img:'https://img.freepik.com/premium-photo/magical-seljalandsfoss-waterfall-iceland_31965-3879.jpg?w=996',
+                company:'waterfalls',
+               rating:1.9,
+               weight:'travel',
+               price:10500,
+            },
+            {
+                id:'travel',
+                proName:'gustave Camping Hiking Hunting Travel Beach Bucket Hat for Men Women Boys and  (Khaki, Pack of 1)',
+                img:'https://img.freepik.com/free-photo/young-traveler_1150-5659.jpg?t=st=1715532794~exp=1715536394~hmac=48649a7f8a3661a5669171af6835c27e79dd34f79b8e7ba63b6e7c402044f63d&w=996',
+                company:'waterfalls',
+               rating:2.4,
+               weight:'travel',
+               price:8900,
+            },
+            {
+                id:'toys',
+                proName:'Toyco 1:14 Scale Pull Back Diecast Alloy Classic Motorcycle Toy Bike Simulation Model  (Assorted Color, Pack of: 1)',
+                img:'https://img.freepik.com/premium-photo/cute-yellow-blue-tricycle-indoors_23-2149308404.jpg?w=996',
+                company:'toybike',
+               rating:4.5,
+               weight:'toys',
+               price:5900,
+            },
+            {
+                id:'toys',
+                proName:'Archana Creations Centy Bullet Bike Toy Scale Model for Kids  (Dark Aqua Blue, Pack of: 1)',
+                img:'https://img.freepik.com/premium-photo/children-tricycle-toy-bicycle-wallpaper-background-childhood-happy-time-photography-works_916211-476193.jpg?w=996',
+                company:'toybike',
+               rating:3.3,
+               weight:'toys',
+               price:3500,
+            },
+            {
+                id:'toys',
+                proName:'Archana Creations Centy Bullet Bike Toy Scale Model for Kids  (Dark Aqua Blue, Pack of: 1)',
+                img:'https://img.freepik.com/free-photo/full-shot-little-kid-sitting-tricycle-home_23-2149308377.jpg?t=st=1715533030~exp=1715536630~hmac=9a61e076ee600d52ebb6397387da2e3645881114c5fe616b6906bd8c36c0be48&w=996',
+                company:'toybike',
+               rating:4.9,
+               weight:'toys',
+               price:3700,
+            },
+            {
+                id:'toys',
+                proName:'venimall Superbike Style Alloy Metal Collectible Pull Back Die - Cast Vehicle Model  (Multicolor)',
+                img:'https://img.freepik.com/premium-photo/childrens-bike-road-generative-ai_272168-8368.jpg?w=1060',
+                company:'toybike',
+               rating:3.4,
+               weight:'toys',
+               price:2000,
+            },
+            {
+                id:'toys',
+                proName:'RSS SOFT TOYS Adorable Strawberry Rabbit Plushie, Cute Bunny Soft Toy - 35 cm  (Pink',
+                img:'https://img.freepik.com/free-photo/fluffy-toy-texture-close-up_23-2149686897.jpg?t=st=1715533309~exp=1715536909~hmac=a27e6b51c5d8329590d87f673223b92424a56d1b09d076c701c3b28e7c57b5a1&w=996',
+                company:'teddybear',
+               rating:4.4,
+               weight:'toys',
+               price:1900,
+            },
+            {
+                id:'toys',
+                proName:'Osjs SOFT TOYS LOVER teddy bear pink colors size 3 feet - 90.2 cm  (Pink)',
+                img:'https://img.freepik.com/premium-photo/brown-teddy-bear-with-blue-shirt-wearing-christmas-hat-sofa_103864-15.jpg?w=996',
+                company:'teddybear',
+               rating:2.4,
+               weight:'toys',
+               price:2870,
+            },
+            {
+                id:'toys',
+                proName:'Macros Super Soft 10 Complete Pack Stuffed/soft toy Combo of Teddy Bear for kids / Gift - 25 cm  (Blue, Pink, Yellow, Black)',
+                img:'https://img.freepik.com/premium-photo/teddy-bear-sitting-white-table-blue-wall_7636-1920.jpg?w=996',
+                company:'teddybear',
+               rating:1.4,
+               weight:'toys',
+               price:3570,
+            },
+            {
+                id:'toys',
+                proName:'Kexmon 3 Feet Teddy Bear I Love You Jumbo For Some One Special - 90.5cm (Red) - 90.5 cm  (Red)',
+                img:'https://img.freepik.com/premium-photo/brown-teddy-bear-sits-brown-wooden-table-wooden-car_116441-11527.jpg?w=996',
+                company:'teddybear',
+               rating:3.7,
+               weight:'toys',
+               price:1570,
+            },
+            {
+                id:'toys',
+                proName:'LEGO Classic Around The World Classic Around The World (950 Blocks)  (Multicolor)',
+                img:'https://img.freepik.com/premium-photo/close-up-stuffed-toy-against-white-background_1048944-20971424.jpg?w=996',
+                company:'animal',
+               rating:2.9,
+               weight:'toys',
+               price:2570,
+            },
+            {
+                id:'toys',
+                proName:'Toyporium Wildlife Animal Toy Set Realistic Animal Figures Toys For Kids (12 Pcs. Pack)  (Multicolor)',
+                img:'https://img.freepik.com/premium-photo/pair-cow-bull-figures-blue-background_94046-5905.jpg?w=996',
+                company:'animal',
+               rating:3.3,
+               weight:'toys',
+               price:2780,
+            },
+            {
+                id:'toys',
+                proName:'Toybot Dinosaur Toy with Biting Function Roaring Sound Effect Will Shake Head and Tail  (Green)',
+                img:'https://img.freepik.com/free-photo/still-life-crochet-plushies_23-2151091246.jpg?t=st=1715533465~exp=1715537065~hmac=013cf6d771c3f3df90da05d32912f7930ddfdf38cae4f6345de9b76dfdc0906d&w=996',
+                company:'animal',
+               rating:4.9,
+               weight:'toys',
+               price:6890,
+            },
+
+            {
+                id:'toys',
+                proName:'Toybot Dinosaur Toy with Biting Function Roaring Sound Effect Will Shake Head and Tail  (Green)',
+                img:'https://img.freepik.com/premium-photo/children-plastic-toy-background_874813-20002.jpg?w=900',
+                company:'animal',
+               rating:3.8,
+               weight:'toys',
+               price:3990,
+            },
+            {
+                id:'vehicle',
+                proName:'Smily Buds Defender Diecast Metal Pullback Action Car with Openable Doors  (Blue, Pack of: 1)',
+                img:'https://img.freepik.com/free-photo/yellow-car-gas-station_23-2150697544.jpg?t=st=1715533611~exp=1715537211~hmac=e0ae522840468f5331b628bc5570343dde5cacae1461263326ee72e9c821686e&w=996',
+                company:'car',
+               rating:3.8,
+               weight:'car',
+               price:80090,
+            },
+            {
+                id:'vehicle',
+                proName:'Smily Buds Defender Diecast Metal Pullback Action Car with Openable',
+                img:'https://img.freepik.com/free-vector/white-sedan-car-isolated-white-vector_53876-67356.jpg?t=st=1715533693~exp=1715537293~hmac=caaebb5e96a1e0ccda232f8076f1a2302d8800d107b56d2b7365152fdab0c413&w=826',
+                company:'car',
+               rating:3.8,
+               weight:'car',
+               price:22090,
+            },
+            {
+                id:'vehicle',
+                proName:'Aditi Toys Premium Metal Die-Cast Sports Racer Car with Realistic Engine Sound,Lights,Doors  (Black, Pack of: 1)',
+                img:'https://img.freepik.com/premium-photo/jaguar-fpace-highway-passes-by-hypercar-rushes-through-city_124507-85885.jpg?w=996',
+                company:'car',
+               rating:3.8,
+               weight:'car',
+               price:28090,
+            },
+            {
+                id:'vehicle',
+                proName:'Aditi Toys Premium Metal Die-Cast Sports Racer Car with Realistic Engine Sound,Lights,Doors  (Black, Pack of: 1)',
+                img:'https://img.freepik.com/free-photo/yellow-car-gas-station_23-2150697544.jpg?t=st=1715533611~exp=1715537211~hmac=e0ae522840468f5331b628bc5570343dde5cacae1461263326ee72e9c821686e&w=996',
+                company:'car',
+               rating:3.8,
+               weight:'car',
+               price:30689,
+            },
+            {
+                id:'vehicle',
+                proName:'Ampere Reo Li Plus Booking for Ex-Showroom Price (with Portable Charger, Blue)',
+                img:'https://img.freepik.com/free-photo/beautiful-biker-girl-wearing-black-leather-jacket-leaning-her-superbike-outside-building_613910-5914.jpg?t=st=1715533934~exp=1715537534~hmac=606020725dc7203ea4018cda5c8a13ef7bfa43fcad1d26b1db6e0df1f48af291&w=996',
+                company:'bike',
+               rating:4.2,
+               weight:'bike',
+               price:32690,
+            },
+            {
+                id:'vehicle',
+                proName:'Odysse E2GO Plus Booking for Ex-Showroom Price Ex-Showroom Price Ex-Showroom Price (with Portable Charger, Combat blue)',
+                img:'https://img.freepik.com/premium-photo/ev-motorbike-with-charging-station-isolated-white-background-green-energy-technology-transportation-concept-3d-illustration-rendering_10307-2288.jpg?w=1060',
+                company:'bike',
+               rating:2.8,
+               weight:'bike',
+               price:20090,
+            },
+            {
+                id:'vehicle',
+                proName:'Odysse Racer Lite V2 Booking for Ex-Showroom Price (with Portable Charger, Pastel Peach)',
+                img:'https://img.freepik.com/free-photo/full-shot-man-riding-motorbike_23-2150810245.jpg?t=st=1715533855~exp=1715537455~hmac=20a738b7eba2363c51efd4bac1b2e7095c2ae4d06f882723ebebfcfdd8ce4032&w=996',
+                company:'bike',
+               rating:4.8,
+               weight:'bike',
+               price:49090,
+            },
+            {
+                id:'vehicle',
+                proName:'Odysse E2GO LITE Booking  (with Portable Charger, Combat Red)',
+                img:'https://img.freepik.com/free-photo/view-motorcycle-garage-warehouse_23-2150704673.jpg?t=st=1715533832~exp=1715537432~hmac=727d8c26a5b1b6edee3abc3f954c069ba0d0ff6011629009f71cd58f8f72bf6d&w=826',
+                company:'bike',
+               rating:3.8,
+               weight:'bike',
+               price:45090,
+            },
+            {
+                id:'vehicle',
+                proName:'KINGCROSS MATRIX 20T WITH REAR SHOCKER 20 T BMX Cycle  (Single Speed, Black, Orange)',
+                img:'https://img.freepik.com/free-photo/excited-male-model-sport-white-shoes-posing-bike-indoor-photo-cheerful-african-guy-sitting-bicycle-looking_197531-20128.jpg?t=st=1715534131~exp=1715537731~hmac=86a25658d1087870e1ff82a3bf66b5821e779cd51a8aa31562487463a91e997c&w=996',
+                company:'cycle',
+               rating:3.2,
+               weight:'cycle',
+               price:24090,
+            },
+            {
+                id:'vehicle',
+                proName:'KINGCROSS MATRIX 20T WITH REAR SHOCKER 20 T BMX Cycle  (Single Speed, Black, Orange)',
+                img:'https://img.freepik.com/free-photo/white-bicycle-standing-park-morning-fitness-loneliness_1153-6768.jpg?t=st=1715534102~exp=1715537702~hmac=4f35699d384f11385589ff7d6877d46e1199a1e9e27a8cf7f4ef3339f6f5ed7c&w=996',
+                company:'cycle',
+               rating:2.8,
+               weight:'cycle',
+               price:46090,
+            },
+            {
+                id:'vehicle',
+                proName:'LEADER Beast 26T and Complete Accessories 26 T Mountain Cycle  (Single Speed, Black)',
+                img:'https://img.freepik.com/free-photo/hipster-bicycle-morning-sunrise-by-sea_285396-5393.jpg?t=st=1715534018~exp=1715537618~hmac=f780d753ff7119389171ece22d1ff46bb03cf8e2719c85ac9f3d73fe0c2600ea&w=996',
+                company:'cycle',
+               rating:3.3,
+               weight:'cycle',
+               price:10090,
+            },
+            {
+                id:'vehicle',
+                proName:'LEADER Beast 26T with Front and Complete Accessories 26 T Mountain Cycle  (Single Speed, Black)',
+                img:'https://img.freepik.com/free-vector/bicycle-cartoon-isolated_1308-27560.jpg?t=st=1715534048~exp=1715537648~hmac=2f7c310d539dbd50c7d163105f0d6b118c790d0d086bd7a9ed7ac45aa8233b3f&w=996',
+                company:'cycle',
+               rating:1.8,
+               weight:'cycle',
+               price:10190,
+            },
+
+
+        ]
+
+             
+            products.map((item,index)=>{
+            result1.innerHTML=''
+            result1.style.background='transparent'
+            result.style.marginLeft='-340px';
+               result.innerHTML+=`<div class="card">
+               
+                <img src=${item.img}></img>
+                <div style="font-size:16px;letter-spacing:1.2px;line-height:1.8">${item.proName}</div>
+                <p><i class="fa-solid fa-star"></i>${item.rating}</p>
+                <h4>&#8377;${item.price}/-</h4>
+                <div style="display:flex;justify-content:space-between;outline:none;margin-top:10px">
+                    <button style="border:1px solid rgb(214, 209, 209);font-size:15px;font-weight:450;
+;background:transparent;padding:10px 30px;font-weight:bold" onclick="getGroceryDetails(${index})">view more</button>
+
+                    <button style="border:1px solid rgb(214, 209, 209);;font-size:14px;font-weight:500;
+;color:blue;background:transparent;padding:10px 46px">Add Item</button>
+               
+                </div>
+              </div>`
+            })
+        //filtergrocerybox
+         function filterGroceryBox(filteredData){
+            result.style.marginLeft='20px'
+            result1.style.background='white'
+            result1.style.marginLeft='-68px'
+
+           result1.innerHTML+=`<div class="filtersApply">
+              <div class="filters">
+                <h3>FILTERS</h3>
+              <p style="color:blue">CLEAR ALL</p>
+            </div>
+            <div class="brands">
+               <div>
+                <h4>BRANDS</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+                <div class="checkbox">
+                    <div>
+                    <input type="checkbox" onclick="getpulses()" id="pulses"></input>
+                    <div style="display:none">
+                        <p>get pulses</p>
+                    </div>
+                    <p>Pulses</p>
+                  </div>
+                 <div>
+                    <input type="checkbox" onclick="getwheat()"></input>
+                    <p>Wheat</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getchocolate()"></input>
+                    <p>Chocolate</p>
+                </div>
+            </div>
+            <div class="ratings">
+              <div>
+                <h4>CUSTOMER RATINGS</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+               <div class="checkbox">
+                <div>
+                    <input type="checkbox" onclick="getByGroceryRating4()" ></input>
+                    <p>4 & above</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByGroceryRating3()"  ></input>
+                    <p>3 & BELOW</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByGroceryRating2()" ></input>
+                    <p>2 & BELOW</p>
+                </div>
+                </div>
+                <div class="prices" style="display:flex;justify-content:space-between;margin-top:20px">
+                <h4>PRICES</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+               <div class="checkbox">
+                <div>
+                    <input type="checkbox" onclick="getByGroceryPrice1()"></input>
+                    <p>below 100</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByGroceryPrice2()"  ></input>
+                    <p>below 350</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByGroceryPrice3()"></input>
+                    <p>above 350</p>
+                </div>
+                </div>
+
+            </div>
+            </div>`
+         }
+        //filetrMobilebox
+         function filterMobileBox(filteredData){
+            result1.innerHTML=''
+            result.style.marginLeft='20px'
+            result1.style.background='white'
+
+           result1.innerHTML+=`<div class="filtersApply">
+              <div class="filters">
+                <h3>FILTERS</h3>
+              <p style="color:blue">CLEAR ALL</p>
+            </div>
+            <div class="brands">
+               <div>
+                <h4>BRANDS</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+                <div class="checkbox" >
+                    <div>
+                    <input type="checkbox" onclick="getvivo()" ></input>
+                    <div style="display:none">
+                        <p>get vivo</p>
+                    </div>
+                    <p>Vivo</p>
+                  </div>
+                 <div>
+                    <input type="checkbox" onclick="getoppo()"></input>
+                    <p>Oppo</p>
+                </div>
+                <div>
+                    <input type="checkbox"  onclick="getgalaxy()"></input>
+                    <p>Galaxy</p>
+                </div>
+            </div>
+            <div class="ratings">
+              <div>
+                <h4>CUSTOMER RATINGS</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+               <div class="checkbox">
+                <div>
+                    <input type="checkbox" onclick="getByMobileRating4()" ></input>
+                    <p>4 & above</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByMobileRating3()"  ></input>
+                    <p>3 & BELOW</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByMobileRating2()" ></input>
+                    <p>2 & BELOW</p>
+                </div>
+                </div>
+                <div class="prices" style="display:flex;justify-content:space-between;margin-top:20px">
+                <h4>PRICES</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+               <div class="checkbox">
+                <div>
+                    <input type="checkbox" onclick="getByMobilePrice1()"></input>
+                    <p>below 10000</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByMobilePrice2()"  ></input>
+                    <p>below 30000</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByMobilePrice3()"></input>
+                    <p>above 30000</p>
+                </div>
+                </div>
+
+            </div>
+            </div>`
+         }
+       //fileterTravelbox
+
+         function filterTravelBox(filteredData){
+            result1.innerHTML=''
+            result.style.marginLeft='20px'
+            result1.style.background='white'
+
+           result1.innerHTML+=`<div class="filtersApply">
+              <div class="filters">
+                <h3>FILTERS</h3>
+              <p style="color:blue">CLEAR ALL</p>
+            </div>
+            <div class="brands">
+               <div>
+                <h4>BRANDS</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+                <div class="checkbox" >
+                    <div>
+                    <input type="checkbox" onclick="gethills()" ></input>
+                    <div style="display:none">
+                        <p>get Hills</p>
+                    </div>
+                    <p>hills</p>
+                  </div>
+                 <div>
+                    <input type="checkbox" onclick="getbeach()"></input>
+                    <p>beach</p>
+                </div>
+                <div>
+                    <input type="checkbox"  onclick="getwaterfalls()"></input>
+                    <p>waterfalls</p>
+                </div>
+            </div>
+            <div class="ratings">
+              <div>
+                <h4>CUSTOMER RATINGS</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+               <div class="checkbox">
+                <div>
+                    <input type="checkbox" onclick="getByTravelRating4()" ></input>
+                    <p>4 & above</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByTravelRating3()"  ></input>
+                    <p>3 & BELOW</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByTravelRating2()" ></input>
+                    <p>2 & BELOW</p>
+                </div>
+                </div>
+                <div class="prices" style="display:flex;justify-content:space-between;margin-top:20px">
+                <h4>PRICES</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+               <div class="checkbox">
+                <div>
+                    <input type="checkbox" onclick="getByTravelPrice1()"></input>
+                    <p>Travel below 15000</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByTravelPrice2()"  ></input>
+                    <p>Travel below 50000</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByTravelPrice3()"></input>
+                    <p>Travel above 50000</p>
+                </div>
+                </div>
+
+            </div>
+            </div>`
+         }
+          //filtertoysbox
+
+         function filterToysBox(filteredData){
+            result1.innerHTML=''
+            result.style.marginLeft='20px'
+            result1.style.marginLeft='-70px'
+            result1.style.background='white'
+
+           result1.innerHTML+=`<div class="filtersApply">
+              <div class="filters">
+                <h3>FILTERS</h3>
+              <p style="color:blue">CLEAR ALL</p>
+            </div>
+            <div class="brands">
+               <div>
+                <h4>BRANDS</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+                <div class="checkbox" >
+                    <div>
+                    <input type="checkbox" onclick="gettoybike()" ></input>
+                    <div style="display:none">
+                        <p>get bikes</p>
+                    </div>
+                    <p>toybikes</p>
+                  </div>
+                 <div>
+                    <input type="checkbox" onclick="getteddybear()"></input>
+                    <p>teddybear</p>
+                </div>
+                <div>
+                    <input type="checkbox"  onclick="getanimal()"></input>
+                    <p>animals</p>
+                </div>
+            </div>
+            <div class="ratings">
+              <div>
+                <h4>CUSTOMER RATINGS</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+               <div class="checkbox">
+                <div>
+                    <input type="checkbox" onclick="getByToysRating4()" ></input>
+                    <p>4 & above</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByToysRating3()"  ></input>
+                    <p>3 & BELOW</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByToysRating2()" ></input>
+                    <p>2 & BELOW</p>
+                </div>
+                </div>
+                <div class="prices" style="display:flex;justify-content:space-between;margin-top:20px">
+                <h4>PRICES</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+               <div class="checkbox">
+                <div>
+                    <input type="checkbox" onclick="getByToysPrice1()"></input>
+                    <p> below 2000</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByToysPrice2()"  ></input>
+                    <p> below 6000</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByToysPrice3()"></input>
+                    <p> above 6000</p>
+                </div>
+                </div>
+
+            </div>
+            </div>`
+         }
+
+
+
+         //filtertwowheelersbox
+
+         function filterTwowheelersBox(filteredData){
+            result1.innerHTML=''
+            result.style.marginLeft='20px'
+            result1.style.background='white'
+
+           result1.innerHTML+=`<div class="filtersApply">
+              <div class="filters">
+                <h3>FILTERS</h3>
+              <p style="color:blue">CLEAR ALL</p>
+            </div>
+            <div class="brands">
+               <div>
+                <h4>BRANDS</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+                <div class="checkbox" >
+                    <div>
+                    <input type="checkbox" onclick="getcycle()" ></input>
+                    <div style="display:none">
+                        <p>get cycles</p>
+                    </div>
+                    <p>cycles</p>
+                  </div>
+                 <div>
+                    <input type="checkbox" onclick="getcar()"></input>
+                    <p>cars</p>
+                </div>
+                <div>
+                    <input type="checkbox"  onclick="getbike()"></input>
+                    <p>bikes</p>
+                </div>
+            </div>
+            <div class="ratings">
+              <div>
+                <h4>CUSTOMER RATINGS</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+               <div class="checkbox">
+                <div>
+                    <input type="checkbox" onclick="getByTwowheelersRating4()" ></input>
+                    <p>4 & above</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByTwowheelersRating3()"  ></input>
+                    <p>3 & BELOW</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByTwowheelersRating2()" ></input>
+                    <p>2 & BELOW</p>
+                </div>
+                </div>
+                <div class="prices" style="display:flex;justify-content:space-between;margin-top:20px">
+                <h4>PRICES</h4>
+                <i class="fa-solid fa-angle-up"></i>
+                </div>
+               <div class="checkbox">
+                <div>
+                    <input type="checkbox" onclick="getByTwowheelersPrice1()"></input>
+                    <p> below 30000</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByTwowheelersPrice2()"  ></input>
+                    <p>cost below 60000</p>
+                </div>
+                <div>
+                    <input type="checkbox" onclick="getByTwowheelersPrice3()"></input>
+                    <p>cost above 60000</p>
+                </div>
+                </div>
+
+            </div>
+            </div>`
+         }
+
+         
+//filterTheGroceryProducts
+        function filterTheGroceryProducts(filteredData){
+            result.innerHTML=''
+            result1.style.background='transparent'
+            
+            filterGroceryBox(filteredData);
+            if(filteredData.length==0){
+                result.innerHTML='<h1>DATA NOT FOUND</h1>'
+            }
+            filteredData.map((item,index)=>{
+                result.innerHTML+=`
+                   <div class="card">
+                    <img src=${item.img} onclick="getGroceryDetails(${index})"></img>
+                <div>${item.proName}</div>
+                <p><i class="fa-solid fa-star"></i>${item.rating}</p>
+                <h4>&#8377;${item.price}/-</h4>
+                    </div>`
+            })
+        }
+       
+
+       //getDetails
+      function getGroceryDetails(index){
+        
+        console.log(index)
+        result.style.marginLeft='-321px'
+        result.innerHTML=''
+        section.style.display='none'
+        
+        result.innerHTML=`<div class="grocery" >
+        <div style="display:flex;flex-direction:column;gap:10px">
+            <img src=${products[index].img} style="width:100px"></img>
+            <img src=${products[index].img} style="width:100px"></img>
+            <img src=${products[index].img} style="width:100px"></img>
+            <img src=${products[index].img} style="width:100px"></img>
+        </div>
+        <img src=${products[index].img} style="width:580px;height:620px"></img>
+        <div style="width:500px">
+            <p style="font-size:28px">${products[index].proName}</p>
+            <p class="rating"><i class="fa-solid fa-star"></i>${products[index].rating}</p>
+            <h1>$${products[index].price}/-</h1>
+            <p style="margin-top:10px;font-weight:630;font-size:18px">coupons for you</p>
+            <p style="font-size:14px;color:grey">will be applied in next step</p>
+            <p style="margin-top:15px;margin-bottom:15px;font-weight:630;font-size:18px">Available offers</h4>
+            <p><span style="font-weight:630">Bank Offer</span> Get ₹25 instant discount on first Flipkart UPI txns on order of ₹250 and aboveT&C</p>
+            <p style="margin-top:10px"><span style="font-weight:630">Bank Offer5% </span>Cashback on Flipkart Axis Bank CardT&C</p>
+
+            <button class="lightBtn" onclick="addToCart()">Add to cart</button>
+            <button class="darkBtn" onclick="buyNow()">Buy Now</button>
+        </div>
+
+        </div>`
+      }
+      //addtoCart
+      var i=0;
+      function addToCart(){
+        i++
+        alert(`${i} card is added `)
+      }
+      function buyNow(){
+
+      }
+      //filterTheMobileProducts
+       function filterTheMobileProducts(filteredData){
+            result.innerHTML=''
+            result1.style.background='transparent'
+            
+            filterMobileBox(filteredData);
+            if(filteredData.length==0){
+                result.innerHTML='<h1>DATA NOT FOUND</h1>'
+            }
+            filteredData.map((item,index)=>{
+                   result.innerHTML+=`
+                   <div class="card">
+                    <img src=${item.img}></img>
+                <div>${item.proName}</div>
+                <p><i class="fa-solid fa-star"></i>${item.rating}</p>
+                <h4>&#8377;${item.price}/-</h4>
+                    </div>`
+            })
+       }
+       //filterTheTravelProducts
+       function filterTheTravelProducts(filteredData){
+            result.innerHTML=''
+            result1.style.background='transparent'
+            
+            filterTravelBox(filteredData);
+            if(filteredData.length==0){
+                result.innerHTML='<h1>DATA NOT FOUND</h1>'
+            }
+            filteredData.map((item,index)=>{
+                   result.innerHTML+=`
+                   <div class="card">
+                    <img src=${item.img} onclick="getGroceryDetails(${index})"></img>
+                <div>${item.proName}</div>
+                <p><i class="fa-solid fa-star"></i>${item.rating}</p>
+                <h4>&#8377;${item.price}/-</h4>
+                    </div>`
+            })
+       }
+
+///filtertoyproducts
+       function filterTheToysProducts(filteredData){
+            result.innerHTML=''
+            result1.style.background='transparent'
+            
+            filterToysBox(filteredData);
+            if(filteredData.length==0){
+                result.innerHTML='<h1>DATA NOT FOUND</h1>'
+            }
+            filteredData.map((item,index)=>{
+                   result.innerHTML+=`
+                   <div class="card">
+                    <img src=${item.img} onclick="getGroceryDetails(${index})"></img>
+                <div>${item.proName}</div>
+                <p><i class="fa-solid fa-star"></i>${item.rating}</p>
+                <h4>&#8377;${item.price}/-</h4>
+                    </div>`
+            })
+       }
+
+       //filterTheTwowheelersProducts
+       function filterTheTwowheelersProducts(filteredData){
+            result.innerHTML=''
+            result1.style.background='transparent'
+            
+            filterTwowheelersBox(filteredData);
+            if(filteredData.length==0){
+                result.innerHTML='<h1>DATA NOT FOUND</h1>'
+            }
+            filteredData.map((item,index)=>{
+                   result.innerHTML+=`
+                   <div class="card">
+                    <img src=${item.img} onclick="getGroceryDetails(${index})"></img>
+                <div>${item.proName}</div>
+                <p><i class="fa-solid fa-star"></i>${item.rating}</p>
+                <h4>&#8377;${item.price}/-</h4>
+                    </div>`
+            })
+       }
+    
+//  filteration based on condition
+        function Grocery(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.id=='grocery')
+          
+          console.log(filteredData)
+          filterTheGroceryProducts(filteredData)
+        }
+
+        function Mobiles(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.id=='mobiles')
+          console.log(filteredData)
+          filterTheMobileProducts(filteredData)
+        }
+       
+
+        function Travel(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.id=='travel')
+          
+          console.log(filteredData)
+          filterTheTravelProducts(filteredData)
+        }
+
+        function Toys(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.id=='toys')
+          
+          console.log(filteredData)
+          filterTheToysProducts(filteredData)
+        }
+        function Twowheelers(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.id=='vehicle')
+          
+          console.log(filteredData)
+          filterTheTwowheelersProducts(filteredData)
+        }
+        function getchocolate(){
+
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'Chocolate') {
+            filteredData = products.filter((element) => element.company == 'Chocolate');
+        } 
+            }
+          console.log(filteredData)
+          filterTheGroceryProducts(filteredData)
+        }
+        function getpulses(){
+
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'pulses') {
+            filteredData = products.filter((element) => element.company === 'pulses');
+        } 
+            }
+          console.log(filteredData)
+          filterTheGroceryProducts(filteredData)
+        }
+
+       
+        function getwheat(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+              if (product.company == 'wheatFlour') {
+                filteredData = products.filter((element) => element.company =='wheatFlour');
+             } 
+        
+           }          
+           filterTheGroceryProducts(filteredData)
+
+        }
+      //getvivo
+      function getvivo(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'vivo') {
+            filteredData = products.filter((element) => element.company === 'vivo');
+        } 
+            }
+          console.log(filteredData)
+          filterTheMobileProducts(filteredData)
+        }
+
+        //getoppo
+        function getoppo(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'oppo') {
+            filteredData = products.filter((element) => element.company === 'oppo');
+        } 
+            }
+          console.log(filteredData)
+          filterTheMobileProducts(filteredData)
+        }
+//getgalaxy
+        function getgalaxy(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'galaxy') {
+            filteredData = products.filter((element) => element.company === 'galaxy');
+        } 
+            }
+          console.log(filteredData)
+          filterTheGroceryProducts(filteredData)
+        }
+
+        //gethills
+        function gethills(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'hills') {
+            filteredData = products.filter((element) => element.company === 'hills');
+        } 
+            }
+          console.log(filteredData)
+          filterTheTravelProducts(filteredData)
+        }
+
+        //getbeach
+        function getbeach(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'beach') {
+            filteredData = products.filter((element) => element.company === 'beach');
+        } 
+            }
+          console.log(filteredData)
+          filterTheTravelProducts(filteredData)
+        }
+
+        //getwaterfalls
+        function getwaterfalls(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'waterfalls') {
+            filteredData = products.filter((element) => element.company === 'waterfalls');
+        } 
+            }
+          console.log(filteredData)
+          filterTheTravelProducts(filteredData)
+        }
+
+//getteddybear
+        function getteddybear(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'teddybear') {
+            filteredData = products.filter((element) => element.company === 'teddybear');
+        } 
+            }
+          console.log(filteredData)
+          filterTheToysProducts(filteredData)
+        }
+
+        //getanimal
+        function getanimal(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'animal') {
+            filteredData = products.filter((element) => element.company === 'animal');
+        } 
+            }
+          console.log(filteredData)
+          filterTheToysProducts(filteredData)
+        }
+        //gettoybike
+       
+        function gettoybike(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        // if (product.company == 'toybike') {
+        //     filteredData = pr
+
+
+            if (product.company == 'toybike') {
+            filteredData = products.filter((element) => element.company === 'toybike');
+        } 
+            }
+          console.log(filteredData)
+          filterTheToysProducts(filteredData)
+        }
+        //getteddybear
+        function getteddybear(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'teddybear') {
+            filteredData = products.filter((element) => element.company === 'teddybear');
+        } 
+            }
+          console.log(filteredData)
+          filterTheToysProducts(filteredData)
+        }
+         //getbike
+         function getbike(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'bike') {
+            filteredData = products.filter((element) => element.company === 'bike');
+        } 
+            }
+          console.log(filteredData)
+          filterTheTwowheelersProducts(filteredData)
+        }
+
+         //getteddybear
+         function getcycle(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'cycle') {
+            filteredData = products.filter((element) => element.company === 'cycle');
+        } 
+            }
+          console.log(filteredData)
+          filterTheTwowheelersProducts(filteredData)
+        }
+
+         //getcar
+         function getcar(){
+            result1.innerHTML=''
+            for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.company == 'car') {
+            filteredData = products.filter((element) => element.company === 'car');
+        } 
+            }
+          console.log(filteredData)
+          filterTheTwowheelersProducts(filteredData)
+        }
+ //getByMobileRating2
+ function getByMobileRating2(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating<=2 && Element.id=='mobiles')
+          console.log(filteredData)
+          filterTheMobileProducts(filteredData)
+        }
+       //getByGroceryRating2
+        function getByGroceryRating2(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating<=2 && Element.id=='grocery')
+          console.log(filteredData)
+          filterTheGroceryProducts(filteredData)
+        }
+       
+        //getByTravelRating2
+        function getByTravelRating2(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating<=2 && Element.id=='travel')
+          console.log(filteredData)
+          filterTheTravelProducts(filteredData)
+        }
+        //gettoyrating2
+        function getByToysRating2(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating<=2 && Element.id=='toys')
+          console.log(filteredData)
+          filterTheToysProducts(filteredData)
+        }
+
+         //gettwowheelersrating2
+         function getByTwowheelersRating2(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating<=2 && Element.id=='vehicle')
+          console.log(filteredData)
+          filterTheTwowheelersProducts(filteredData)
+        }
+
+//getByMobileRating3
+        function getByGroceryRating3(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating<=3 && Element.id=='grocery')
+          console.log(filteredData)
+          filterTheGroceryProducts(filteredData)
+        }
+        //getByMobileRating3
+        function getByMobileRating3(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating<=2 && Element.id=='mobiles')
+          console.log(filteredData)
+          filterTheMobileProducts(filteredData)
+        }
+//getByMobileRating3
+        function getByTravelRating3(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating<=2 && Element.id=='travel')
+          console.log(filteredData)
+          filterTheTravelProducts(filteredData)
+        }
+        //gettoysrating3
+        function getByToysRating3(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating<=3 && Element.id=='toys')
+          console.log(filteredData)
+          filterTheToysProducts(filteredData)
+        }
+//gettwowheelersrsting3
+        function getByTwowheelersRating4(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating>4 && Element.id=='vehicle')
+          console.log(filteredData)
+          filterTheTwowheelersProducts(filteredData)
+        }
+//getByGroceryRating4
+        function getByGroceryRating4(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating>=4  && Element.id=='grocery')
+          console.log(filteredData)
+          filterTheGroceryProducts(filteredData)
+        }
+        //getByMobileRating4
+        function getByMobileRating4(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating>=4  && Element.id=='mobiles')
+          console.log(filteredData)
+          filterTheMobileProducts(filteredData)
+        }
+        //getByTravelRating4
+        function getByTravelRating4(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating>=4  && Element.id=='travel')
+          console.log(filteredData)
+          filterTheTravelProducts(filteredData)
+        }
+ 
+        //getByMobileRating4
+        function getByMobileRating4(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating>=4  && Element.id=='mobiles')
+          console.log(filteredData)
+          filterTheMobileProducts(filteredData)
+        }
+        function getByToysRating4(){
+            result1.innerHTML=''
+          let filteredData=  products.filter((Element)=>Element.rating>4 && Element.id=='toys')
+          console.log(filteredData)
+          filterTheToysProducts(filteredData)
+        }
+        function getByTwowheelersRating3(){
+            result1.innerHTML=''
+
+          let filteredData=  products.filter((Element)=>Element.rating<=3 && Element.id=='vehicle')
+          console.log(filteredData)
+          filterTheTwowheelersProducts(filteredData)
+        }
+       
+        //getByGroceryPrice3
+        function getByGroceryPrice3(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>data not found</h1>`
+               }
+               else if(product.price>300 && product.id=='grocery'){
+                filteredData= products.filter((element)=>element.price>300  && element.id=='grocery')
+               }
+             
+            }
+            filterTheGroceryProducts(filteredData)
+        }
+        //getByMobilePrice3
+        function getByMobilePrice3(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>data not found</h1>`
+               }
+              else if(product.price>30000 && product.id=='mobiles'){
+                filteredData= products.filter((element)=>element.price>30000  && element.id=='mobiles')
+               }
+             
+            }
+            filterTheMobileProducts(filteredData)
+        }
+        //getByTravelPrice3
+        function getByTravelPrice3(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>data not found</h1>`
+               }
+              else if(product.price>50000 && product.id=='travel'){
+                filteredData= products.filter((element)=>element.price>50000  && element.id=='travel')
+               }
+             
+            }
+            filterTheTravelProducts(filteredData)
+        }
+
+        
+         //getBytoysPrice3
+         function getByToysPrice3(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>data not found</h1>`
+               }
+              else if(product.price>6000 && product.id=='toys'){
+                filteredData= products.filter((element)=>element.price>6000  && element.id=='toys')
+               }
+             
+            }
+            filterTheToysProducts(filteredData)
+        }
+
+        
+        //getBytwowheelersPrice3
+        function getByTwowheelersPrice3(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>data not found</h1>`
+               }
+               else if(product.price>60000 && product.id=='vehicle'){
+                filteredData= products.filter((element)=>element.price>60000  && element.id=='vehicle')
+               }
+             
+            }
+            filterTheTwowheelersProducts(filteredData)
+        }
+      
+        //getByGroceryPrice1
+        function getByGroceryPrice1(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>data not found</h1>`
+               }
+              else if(product.price<=100 && product.id=='grocery'){
+                filteredData= products.filter((element)=>element.price<=100)
+               }
+            }
+            filterTheGroceryProducts(filteredData)
+        }
+
+        //getByMobilePrice1
+        function getByMobilePrice1(){
+            
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML='<h1>Data not found</h1>'
+               }
+               else if(product.price<=10000 && product.id=='mobiles'){
+                filteredData= products.filter((element)=>element.price<=10000  && element.id=='mobiles');
+               
+            }
+             
+            }
+            filterTheMobileProducts(filteredData)
+        }
+         //getBytoysPrice1
+         function getByToysPrice1(){
+            
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML='<h1>Data not found</h1>'
+               }
+               else if(product.price<=2000 && product.id=='toys'){
+                filteredData= products.filter((element)=>element.price<=2000  && element.id=='toys')
+               
+            }
+             
+            }
+            filterTheToysProducts(filteredData)
+        }
+        //gettravelprice1
+        function getByTravelPrice1(){
+            
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML='<h1>Data not found</h1>'
+               }
+               else if(product.price<=15000 && product.id=='travel'){
+                filteredData= products.filter((element)=>element.price<=15000  && element.id=='travel')
+            }
+            }
+            filterTheTravelProducts(filteredData)
+        }
+        
+         
+        //gettwowheelersprice1
+
+        function getByTwowheelersPrice1(){
+            
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML='<h1>Data not found</h1>'
+               }
+               else if(product.price<=30000 && product.id=='vehicle'){
+                filteredData= products.filter((element)=>element.price<=30000  && element.id=='vehicle')
+               
+            }
+             
+            }
+            filterTheTwowheelersProducts(filteredData)
+        }
+        //getByGroceryPrice2
+
+        function getByGroceryPrice2(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>data not found</h1>`
+               }
+              else if(product.price<=300 && product.id=='grocery'){
+                filteredData= products.filter((element)=>element.price<=300 && element.id=='grocery')
+               }
+            }
+            filterTheGroceryProducts(filteredData)
+        }
+        //getByMobilePrice2
+
+        function getByMobilePrice2(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>data not found</h1>`
+               }
+              else if(product.price<=30000 && product.id=='mobiles'){
+                filteredData= products.filter((element)=>element.price<=30000 && element.id=='mobiles')
+               }
+            }
+          filterTheMobileProducts(filteredData)
+        }
+//getbytravelprice2
+        function getByTravelPrice2(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>data not found</h1>`
+               }
+               else if(product.price<=50000 && product.id=='travel'){
+                filteredData= products.filter((element)=>element.price<=50000 && element.id=='travel')
+               }
+            }
+          filterTheTravelProducts(filteredData)
+        }
+         //getBytoysPrice3
+         function getByToysPrice2(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>data not found</h1>`
+               }
+              else if(product.price<=6000 && product.id=='toys'){
+                filteredData= products.filter((element)=>element.price<=6000  && element.id=='toys')
+               }
+             
+            }
+            filterTheToysProducts(filteredData)
+        }
+
+         //getBytwowheelersPrice2
+         function getByTwowheelersPrice2(){
+            result1.innerHTML=''
+            for(let i=0;i<products.length;i++){
+               const product= products[i];
+               if(product.length==0){
+                result.innerHTML=`<h1>Data not found</h1>`
+               }
+               else if(product.price<=60000 && product.id=='vehicle'){
+                filteredData= products.filter((element)=>element.price<=60000  && element.id=='vehicle')
+               }
+             
+            }
+            filterTheTwowheelersProducts(filteredData)
+        }
+    
+    </script>
+</body>
+</html>
+
+
+
+
+            
